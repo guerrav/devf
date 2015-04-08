@@ -1,6 +1,6 @@
-form.new-list action="/new/list" method="POST"
-  input type="text" name="list[name]"
-  input.button type="submit" value="Add List >>"
+form.new-list action="/new/event" method="POST"
+  input type="text" name="event[name]"
+  input.button type="submit" value="NEW EVENT >>"
 ul.lists
   - @events.each do |event|
     == slim :event, locals: { event: event }

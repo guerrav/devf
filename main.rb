@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'slim'
 require 'data_mapper'
+require "sinatra/reloader" if development?
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
@@ -9,50 +10,47 @@ class Event
   property :id,           Serial 
   property :name,         String
   property :capacity,     Integer
+  property :date,         DateTime
+  property :place,        String
+  property :description,  String
 
-  has n, :purchases
+  has n, :reservations
   has n, :tickets
+end
+
+class Reservation
+  include DataMapper::Resource
+  property :id,           Serial 
+  property :name,         String 
+  property :lastname,     String 
+  property :email,        String
+  property :date,         DateTime
+  property :amount,       Integer  
+
+  belongs_to :ticket
+  belongs_to :event
 end
   
 class Ticket
   include DataMapper::Resource
   property :id,           Serial
-  property :price,       Integer ## 300
-  property :name,         String ## premium
-  property :capacity,       Integer ## 300
+  property :price,        Integer 
+  property :nametype,     String
+  property :description,  String  
+  property :capacity,     Integer 
 
-
-  has n, :purchases
-  belongs_to :event
-end
-
-class Purchase
-  include DataMapper::Resource
-  property :id,           Serial 
-  property :name,         String ## jorge
-  property :lastname,         String ## castro
-  property :email,         String ## ja@a.com
-
-  has n, :items
+  
   belongs_to :event
 end
 
 
-class Item
-  include DataMapper::Resource
-  property :id,           Serial 
-  property :amount,         Integer
-
-  belongs_to :purchase
-  belongs_to :ticket
-end
 
 
 class Payment
   include DataMapper::Resource
   property :id,           Serial
   property :type,         String
-  belongs_to :purchase
+  belongs_to :reservation
 end
 
 
@@ -70,33 +68,54 @@ end
 
 
 
-
-
-
-
-post '/:id' do
-  List.get(params[:id]).tasks.create params['task']
-  redirect '/'
-end
-
-delete '/task/:id' do
-  Task.get(params[:id]).destroy
-  redirect '/'
-end
-
-put '/task/:id' do
-  task = Task.get params[:id]
-  task.completed_at = task.completed_at.nil? ? Time.now : nil
-  task.save
-  redirect '/'
-end
+######## EVENT
 
 post '/new/event' do
   Event.create params['event']
   redirect '/'
 end
 
-delete '/list/:id' do
-  List.get(params[:id]).destroy
+delete '/event/:id' do
+  Event.get(params[:id]).destroy
+  redirect back
+end
+
+
+######## TICKET
+
+# CREATE
+
+post '/event/:id' do
+  
+  event = Event.get(params[:id])
+  ticket = event.tickets.create! params['ticket']
+  ticket.save
+  redirect back
+end
+
+# DELETE
+
+delete '/ticket/:id' do
+  Ticket.get(params[:id]).destroy
+  redirect back
+end
+
+# UPDATE
+
+put '/ticket/:id' do
+  ticket = Ticket.get params[:id]
+  ticket.update(params[:ticket])  
+end
+
+
+
+
+
+post '/:id' do
+  Event.get(params[:id]).tasks.create params['task']
   redirect '/'
 end
+
+
+
+
