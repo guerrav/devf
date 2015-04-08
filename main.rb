@@ -77,6 +77,16 @@ get '/event/new-booking/:id' do
   slim :new_booking
 end
 
+get '/event/info/:id' do
+  @event = Event.get(params[:id])
+  slim :event_info
+end
+
+get '/booking/payment/:id' do
+
+  @ticket = 
+  slim :payment
+end
 
 
 
@@ -131,7 +141,7 @@ post '/ticket/:id' do
   booking = ticket.bookings.create! params['booking']
   booking.event_id = ticket[:event_id]
   booking.save
-  redirect back
+  redirect '/booking/payment/:id'
 end
 
 
