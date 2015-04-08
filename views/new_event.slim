@@ -1,0 +1,26 @@
+form.new-list action="/new/event" method="POST"
+  input type="text" name="event[name]"
+  input.button type="submit" value="NEW EVENT >>"
+ul.lists
+  - @events.each do |event|
+    li.event
+  		h1= event.name
+
+  		form action="/event/#{event.id}" method="POST" title="Delete this event"
+   			input type="hidden" name="_method" value="DELETE"
+    		input type="submit" value="DELETE EVENT"
+
+  		form.new-list action="/new-event/#{event.id}" method="POST"
+    		input type="text" placeholder="nombre" name="ticket[nametype]"
+    		input type="text" placeholder="precio" name="ticket[price]"
+    		input type="text" placeholder="descripcion" name="ticket[description]"
+    		input type="text" placeholder="capacidad" name="ticket[capacity]"
+   			input.button type="submit" value="NEW Tipo de boleto >>"
+
+  		
+
+    	ul.tasks
+    		- event.tickets.each do |ticket|
+      			li.ticket
+ 			 	= ticket.nametype
+

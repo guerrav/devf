@@ -1,0 +1,8 @@
+-if @event
+
+
+	h1= @event.name
+
+	ul.tasks
+    - @event.tickets.each do |ticket|
+      == slim :ticket, locals: { ticket: ticket }

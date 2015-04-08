@@ -1,8 +1,15 @@
 li.ticket
   = ticket.nametype
-  form.update action="/ticket/#{ticket.id}" method="POST"
-    input type="hidden" name="_method" value="PUT"
+
     
   form.delete action="/ticket/#{ticket.id}" method="POST"
     input type="hidden" name="_method" value="DELETE"
-    input type="submit" value="&times;" title="Delete Task"
+    input type="submit" value="x" title="Delete Ticket"
+
+  form.new-list action="/ticket/#{ticket.id}" method="POST"
+    input type="text" placeholder="amount" name="booking[amount]"
+    input.button type="submit" value="NEW Reservacion >>"
+
+ul.lists
+  - ticket.bookings.each do |booking|
+    == slim :booking, locals: { booking: booking }

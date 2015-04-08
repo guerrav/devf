@@ -14,11 +14,23 @@ class Event
   property :place,        String
   property :description,  String
 
-  has n, :reservations
+  
   has n, :tickets
 end
 
-class Reservation
+class Ticket
+  include DataMapper::Resource
+  property :id,           Serial
+  property :price,        Integer 
+  property :nametype,     String
+  property :description,  String  
+  property :capacity,     Integer 
+
+  has n, :bookings
+  belongs_to :event
+end
+
+class Booking
   include DataMapper::Resource
   property :id,           Serial 
   property :name,         String 
@@ -29,19 +41,10 @@ class Reservation
 
   belongs_to :ticket
   belongs_to :event
+  has n, :payments
 end
   
-class Ticket
-  include DataMapper::Resource
-  property :id,           Serial
-  property :price,        Integer 
-  property :nametype,     String
-  property :description,  String  
-  property :capacity,     Integer 
 
-  
-  belongs_to :event
-end
 
 
 
@@ -50,7 +53,7 @@ class Payment
   include DataMapper::Resource
   property :id,           Serial
   property :type,         String
-  belongs_to :reservation
+  belongs_to :booking
 end
 
 
@@ -64,6 +67,16 @@ get '/' do
   slim :index
 end
 
+get '/new-event' do
+  @events = Event.all(:order => [:name])
+  slim :new_event
+end
+
+get '/event/new-booking/:id' do
+  @event = Event.get(params[:id])
+  slim :new_booking
+end
+
 
 
 
@@ -72,7 +85,7 @@ end
 
 post '/new/event' do
   Event.create params['event']
-  redirect '/'
+  redirect back
 end
 
 delete '/event/:id' do
@@ -85,7 +98,7 @@ end
 
 # CREATE
 
-post '/event/:id' do
+post '/new-event/:id' do
   
   event = Event.get(params[:id])
   ticket = event.tickets.create! params['ticket']
@@ -102,12 +115,37 @@ end
 
 # UPDATE
 
-put '/ticket/:id' do
-  ticket = Ticket.get params[:id]
-  ticket.update(params[:ticket])  
+#put '/ticket/:id' do
+#  ticket = Ticket.get params[:id]
+#  ticket.update(params[:ticket])  
+#end
+
+
+
+######## BOOKING
+
+# CREATE
+
+post '/ticket/:id' do
+  ticket = Ticket.get(params[:id])
+  booking = ticket.bookings.create! params['booking']
+  booking.event_id = ticket[:event_id]
+  booking.save
+  redirect back
 end
 
 
+
+######## PAYMENT
+
+# CREATE
+
+post '/booking/:id' do
+  booking = Booking.get(params[:id])
+  payment = booking.payments.create! params['payment']
+  payment.save
+  redirect back
+end
 
 
 
