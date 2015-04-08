@@ -1,33 +1,78 @@
 require 'sinatra'
 require 'slim'
-require 'sass'
 require 'data_mapper'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
-class Task
+class Event
+  include DataMapper::Resource
+  property :id,           Serial 
+  property :name,         String
+  property :capacity,     Integer
+
+  has n, :purchases
+  has n, :tickets
+end
+  
+class Ticket
   include DataMapper::Resource
   property :id,           Serial
-  property :name,         String, :required => true
-  property :completed_at, DateTime
-  belongs_to :list
+  property :price,       Integer ## 300
+  property :name,         String ## premium
+  property :capacity,       Integer ## 300
+
+
+  has n, :purchases
+  belongs_to :event
 end
 
-class List
+class Purchase
+  include DataMapper::Resource
+  property :id,           Serial 
+  property :name,         String ## jorge
+  property :lastname,         String ## castro
+  property :email,         String ## ja@a.com
+
+  has n, :items
+  belongs_to :event
+end
+
+
+class Item
+  include DataMapper::Resource
+  property :id,           Serial 
+  property :amount,         Integer
+
+  belongs_to :purchase
+  belongs_to :ticket
+end
+
+
+class Payment
   include DataMapper::Resource
   property :id,           Serial
-  property :name,         String, :required => true
-  has n, :tasks, :constraint => :destroy  
+  property :type,         String
+  belongs_to :purchase
 end
+
+
+
 
 DataMapper.finalize
 
-get('/styles.css'){ content_type 'text/css', :charset => 'utf-8' ; scss :styles }
 
 get '/' do
-  @lists = List.all(:order => [:name])
+  @events = Event.all(:order => [:name])
   slim :index
 end
+
+
+
+
+
+
+
+
 
 post '/:id' do
   List.get(params[:id]).tasks.create params['task']
@@ -46,8 +91,8 @@ put '/task/:id' do
   redirect '/'
 end
 
-post '/new/list' do
-  List.create params['list']
+post '/new/event' do
+  Event.create params['event']
   redirect '/'
 end
 
