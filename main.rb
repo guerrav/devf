@@ -2,7 +2,9 @@ require 'sinatra'
 require 'slim'
 require 'data_mapper'
 require "sinatra/reloader" if development?
-require 'sinatra/assetpack'
+
+
+
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
@@ -11,10 +13,11 @@ class Event
   property :id,           Serial 
   property :name,         String
   property :capacity,     Integer
-  property :date,         DateTime
+  property :date,         Date
   property :place,        String
   property :city,         String
-  property :description,  String
+  property :image,        String
+  property :description,  Text
 
   
   has n, :tickets
@@ -25,7 +28,7 @@ class Ticket
   property :id,           Serial
   property :price,        Integer 
   property :nametype,     String
-  property :description,  String  
+  property :description,  Text
   property :capacity,     Integer 
 
   has n, :bookings
@@ -35,9 +38,6 @@ end
 class Booking
   include DataMapper::Resource
   property :id,           Serial 
-  property :name,         String 
-  property :lastname,     String 
-  property :email,        String
   property :date,         DateTime
   property :amount,       Integer  
 
@@ -50,6 +50,10 @@ class Payment
   include DataMapper::Resource
   property :id,           Serial
   property :type,         String
+  property :name,         String 
+  property :lastname,     String 
+  property :email,        String
+
   belongs_to :booking
 end
 

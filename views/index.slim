@@ -1,10 +1,10 @@
-div.row
-  div class=["large-12", "columns"]
+.row
+  .large-12.columns
     img src="https://boletia.com/images/landing/boletia-conference.jpg"
-div.row 
-  h1 class=["large-12", "columns"] Eventos destacados del mes
-
-ul.row
-  - @events.each do |event|
-  	-if event.tickets.last
-    	== slim :event, locals: { event: event }
+.row 
+  h3.large-12.columns.text-center Eventos destacados del mes
+.row
+  ul.large-12.columns.no-bullet
+    - @events.each do |event|
+  	  -if event.tickets.last
+    	  == slim :event, locals: { event: event }

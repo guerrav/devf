@@ -1,8 +1,18 @@
 -if @event
+	.row
+		.large-12.columns
+			img src="https://boletia.com/images/landing/boletia-conference.jpg"
+	.row
+		.large-12.columns
+			h3 1. Boletos
 
 
-	h1= @event.name
 
-	ul.tasks
-    - @event.tickets.each do |ticket|
-      == slim :ticket, locals: { ticket: ticket }
+	.row
+		.large-12.columns
+			h3= @event.name
+
+			p TIPO DE TICKET
+			ul.large-12.columns.no-bullet
+				- @event.tickets.each do |ticket|
+					== slim :ticket, locals: { ticket: ticket }

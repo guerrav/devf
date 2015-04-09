@@ -2,15 +2,35 @@
 	- event = Event.get(@booking.event_id)
 	- ticket = Ticket.get(@booking.ticket_id)
 	- total = ticket.price * @booking.amount
+	.row
+		.large-12.columns
+			img src="https://boletia.com/images/landing/boletia-conference.jpg"
+	.row
+		.large-12.columns
+			h3 2. Forma de pago
 
+	.row 
+		.large-9.columns
+			h3= event.name
+			
+			form.new-list action="/booking/#{@booking.id}" method="POST"
+				
+				input type="text" placeholder="nombre" name="payment[name]"
+				
+    		input type="text" placeholder="apellidos" name="payment[lastname]"
+    		input type="text" placeholder="email" name="payment[email]"
+					
 
-	h1= event.name
-	h3= ticket.nametype
-	h3 #{@booking.amount} boletos
-	h3 Costo total: $ #{total}
-
-
-	h3 Seleccionar forma de pago
-	form.new-list action="/booking/#{@booking.id}" method="POST"
-    	input type="text" placeholder="tipo de pago" name="payment[type]"
-    	input.button type="submit" value="Seleccionar"
+				label
+					select name="payment[type]"
+						option value="0" Por favor selecciona
+						option value="1" Tiendas Oxxo
+						option value="2" Tarjeta de Crédito o Débito
+							
+				input.button.small.radius.alert type="submit" value="Comprar"
+		.large-3.columns
+			
+			p RESUMEN DE COMPRA
+			p #{@booking.amount} x #{ticket.nametype} $ #{total}.00
+			
+			p Total: $ #{total}.00 MXN

@@ -1,28 +1,29 @@
-ul.lists
-  - @events.each do |event|
-    li.event
-  		h1= event.name
+.row
+	ul.no-bullet
+		- @events.each do |event|
+			li.event
+				h1= event.name
 
-  		form action="/event/#{event.id}" method="POST" title="Delete this event"
-   			input type="hidden" name="_method" value="DELETE"
-    		input type="submit" value="DELETE EVENT"
+				form action="/event/#{event.id}" method="POST" title="Delete this event"
+					input type="hidden" name="_method" value="DELETE"
+					input.button type="submit" value="DELETE EVENT"
 
-    	h3 Tipos de boleto
-  		form.new-list action="/new-event/#{event.id}" method="POST"
-    		input type="text" placeholder="nombre" name="ticket[nametype]"
-    		input type="text" placeholder="precio" name="ticket[price]"
-    		input type="text" placeholder="descripcion" name="ticket[description]"
-    		input type="text" placeholder="Número máximo de boletos:" name="ticket[capacity]"
-   			input.button type="submit" value="Crear nuevo"
+				h3 Tipos de boleto
+				form.new-list action="/new-event/#{event.id}" method="POST"
+					input type="text" placeholder="nombre" name="ticket[nametype]"
+					input type="text" placeholder="precio" name="ticket[price]"
+					input type="text" placeholder="descripcion" name="ticket[description]"
+					input type="text" placeholder="Número máximo de boletos:" name="ticket[capacity]"
+					input.button type="submit" value="Crear nuevo"
 
-  		
+				
 
-    	ul.tasks
-    		- event.tickets.each do |ticket|
-      			li.ticket
+				ul.tasks
+					- event.tickets.each do |ticket|
+							li.ticket
 
-      			h4 Tipo de ticket: #{ticket.nametype.capitalize}
-      			h4 Precio: #{ticket.price}
-      			h4 Descripción: #{ticket.description}
-      			h4 Número máximo de boletos: #{ticket.capacity}
- 			 	
+							h4 Tipo de ticket: #{ticket.nametype.capitalize}
+							h4 Precio: #{ticket.price}
+							h4 Descripción: #{ticket.description}
+							h4 Número máximo de boletos: #{ticket.capacity}
+					

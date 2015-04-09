@@ -1,13 +1,25 @@
-li.ticket
-  
+li
+  .row 
+    ul
+      li.large-8.columns 
+        p #{ticket.nametype.capitalize}
+        p #{ticket.description}
+        
+      li.large-2.columns
+        p $ #{ticket.price}.00 MXN 
+      li.large-2.columns
+        
+        form action="/ticket/#{ticket.id}" method="POST"
+          
 
-  h4 Tipo de ticket: #{ticket.nametype.capitalize}
-  h4 Precio: $ #{ticket.price}
-  p  #{ticket.description}
-  
+          label
+            select name="booking[amount]"
+              option value="0" 0
+              option value="1" 1
+              option value="2" 2
+              option value="3" 3
+              option value="4" 4
 
-  form.new-list action="/ticket/#{ticket.id}" method="POST"
-    input type="text" placeholder="amount" name="booking[amount]"
-    input.button type="submit" value="Compra boletos"
+          input.button.small.radius.alert type="submit" value="Continuar"
 
 

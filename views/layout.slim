@@ -4,21 +4,24 @@ html
     meta charset="utf-8"
     title Boletia!
     link rel="shortcut icon" href="/favicon.ico"
-    link rel="stylesheet" media="screen, projection" href="/css/foundation.css"
+
+    
+    link rel="stylesheet" href="/css/normalize.css"
+    link rel="stylesheet"  href="/css/foundation.css"
 
 
     /[if lt IE 9]
       script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
   body
-
-    ul.row
-      li class=["large-3 columns"]
-        a href="/"
-          img src="https://boletia.com/assets/interface/header-logo2-a586fd5d40187ae7e4cdb0a52c452f75.png"
-      li class=["large-3 columns"]
-        a href="/" Descubre eventos!
-      li class=["large-3 columns"]
-        a href="/new-event" Crea un nuevo evento!
+    .row
+      ul.no-bullet
+        li.large-6.columns
+          a href="/"
+            img src="https://boletia.com/assets/interface/header-logo2-a586fd5d40187ae7e4cdb0a52c452f75.png"
+        li.large-3.columns
+          a href="/" Descubre eventos!
+        li.large-3.columns
+          a href="/new-event" Crea un nuevo evento!
 
     
 

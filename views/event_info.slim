@@ -1,9 +1,16 @@
 -if @event
-
-
-	h1= @event.name
-
-	h3= @event.description
-
-	a href="/event/new-booking/#{@event.id}" Reserva!
+	.row
+		.large-12.columns
+			img src="https://boletia.com/images/landing/boletia-conference.jpg"
+	.row 
+		.large-9.columns
+			h1= @event.name
+			h3 Acerca de
+			p= @event.description
+		.large-3.columns
+			a.button.alert.radius href="/event/new-booking/#{@event.id}" Quiero Boletos!
+			h4 Cuando
+			p= @event.date
+			h4 Dónde
+			p= @event.place
 
