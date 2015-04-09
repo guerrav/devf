@@ -1,17 +1,22 @@
 li.large-3.columns id="#{event.id}"
-	figure.picture-holder
-		a href="event/info/#{event.id}"
+	.row
+		.large-12.columns
+		
+			a href="Marvin.html" 
+				img src="https://boletia-v2.s3.amazonaws.com/uploads/event/banner/3934/thumb_3.jpg"
+			a href="event/info/#{event.id}"
 	.event-content
 		.row
 			span.city #{event.city}
-			p
-				a href="event/info/#{event.id}" #{event.name.capitalize}
+
 			ul
 				li
-					span.icon.ss-pika.ssp-calendar
+					a href="event/info/#{event.id}" #{event.name.capitalize}
+				li
+					span.fa.fa-calendar-o
 					span #{event.date}
 				li
-					span.icon.ssp-pika.ssp-location
+					span.fa.fa-map-marker
 					span #{event.place}
 			p
 			p
