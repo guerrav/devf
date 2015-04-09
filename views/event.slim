@@ -1,24 +1,22 @@
-li.large-3.columns id="#{event.id}"
-	.row
-		.large-12.columns
-		
-			a href="Marvin.html" 
-				img src="https://boletia-v2.s3.amazonaws.com/uploads/event/banner/3934/thumb_3.jpg"
-			a href="event/info/#{event.id}"
+li.large-4.columns 
+	a href="event/info/#{event.id}"
+		img src="#{event.image}"
 	.event-content
-		.row
-			span.city #{event.city}
+		
 
-			ul
-				li
-					a href="event/info/#{event.id}" #{event.name.capitalize}
-				li
-					span.fa.fa-calendar-o
-					span #{event.date}
-				li
-					span.fa.fa-map-marker
-					span #{event.place}
-			p
-			p
+		i.city #{event.city}
+		h4
+			a href="event/info/#{event.id}" #{event.name.capitalize}
+
+		ul
+			
+			li
+				i.fa.fa-calendar-o.mr-10
+				span #{event.date}
+			li
+				i.fa.fa-map-marker.mr-10
+				span #{event.place}
+		p
+		p
 		.row
-  		a.trk-buy.event-action.button.radius.tiny href="event/new-booking/#{event.id}" Comprar boletos!
+  		a.button.radius.small href="event/new-booking/#{event.id}" Comprar boletos!

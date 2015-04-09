@@ -1,8 +1,51 @@
-.fullwidth img {
-    display: block;
-    width: 100%; /* just add width in case you want the image covering full-width */
-    margin: 0 auto;
+
+
+body { background: url("https://boletia.com/images/interface/bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0); }
+h1 { color:#33383d; text-align:center;}
+
+.menu { background-color:#191919; padding: 20px 0; }
+	.menu li { list-style:none; }
+	.menu a { color:#fff; padding-top:5px; }
+.main-header { background: url("https://boletia.com/images/landing/boletia-conference.jpg") repeat scroll 0 0 / cover rgba(0, 0, 0, 0); height:60%; }
+	.main-header .inner-head { top:180px; position: relative;}
+	.main-header .inner-head div { text-align: center; }
+	.main-header .header-t1 { color: #fff; font-family: "Helvetica Neue",HelveticaNeue,Helvetica,Arial,"Lucida Grande",sans-serif;
+		font-size: 2.8em;
+		font-weight: 700;
+		letter-spacing: 1px;
+		line-height: 1.2;
+		margin: 0 0 16px;
+		padding: 0;
+		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);
+		text-transform: uppercase;
+		margin-bottom:20px;
+	}
+	.main-header .header-t2 {
+		color: #fff;
+		font-size: 1.5em;
+		font-weight: 500;
+		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);
+		margin-bottom:20px;
+	}
+
+.event-content { height:180px; }
+.event-content ul { margin:0; }
+.event-content li { list-style:none; }
+.side-bar { background: none repeat scroll 0 0 #f9f9f9; font-size:.8em; padding-top: 1em; padding-bottom:1em;
+    border: 1px solid #e5e5e5;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); }
+.title { color:#008cba; }
+.title-right { font-weight: bold; }
+.grey { color:#666; }
+
+.orange { background-color: #f77636;
+    background-image: -moz-linear-gradient(center top , #f77636, #d84d09);
+    border-color: #d84d09;
+    box-shadow: 0 1px 0 #bf4508, 0 2px 0 #bf4508, 0 3px 0 #bf4508, 0 4px 0 #bf4508;
 }
+
+.mr-10 { margin-right:10px; width:10px; text-align:center;}
+
 
 .body {
   font-family: 'Montserrat', sans-serif;

@@ -38,7 +38,7 @@ end
 class Booking
   include DataMapper::Resource
   property :id,           Serial 
-  property :date,         DateTime
+  property :date,         Date
   property :amount,       Integer  
 
   belongs_to :ticket
@@ -102,6 +102,19 @@ get '/my-events' do
   @events = Event.all(:order => [:name])
   slim :my_events
 end
+
+get '/contact-us' do
+
+  slim :contact
+end
+
+
+
+
+
+
+
+
 
 
 ######## EVENT
