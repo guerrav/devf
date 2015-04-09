@@ -1,0 +1,10 @@
+-if @payment
+	- booking = Booking.get(@payment.booking_id)
+	
+	h1 #{@payment.type}
+
+	h1 Exito!
+
+	a href="/" Regresa al inicio
+
+	

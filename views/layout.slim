@@ -8,13 +8,19 @@ html
     /[if lt IE 9]
       script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
   body
-    h1
-      a href="/" Boletia!
 
-    a href="/" Descubre eventos!
-    a href="/new-event" Crea un nuevo evento!
+    ul.row
+      li class=["large-3 columns"]
+        a href="/"
+          img src="https://boletia.com/assets/interface/header-logo2-a586fd5d40187ae7e4cdb0a52c452f75.png"
+      li class=["large-3 columns"]
+        a href="/" Descubre eventos!
+      li class=["large-3 columns"]
+        a href="/new-event" Crea un nuevo evento!
 
     
 
 
     == yield
+
+

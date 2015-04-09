@@ -1,15 +1,13 @@
 li.ticket
-  = ticket.nametype
+  
 
-    
-  form.delete action="/ticket/#{ticket.id}" method="POST"
-    input type="hidden" name="_method" value="DELETE"
-    input type="submit" value="x" title="Delete Ticket"
+  h4 Tipo de ticket: #{ticket.nametype.capitalize}
+  h4 Precio: $ #{ticket.price}
+  p  #{ticket.description}
+  
 
   form.new-list action="/ticket/#{ticket.id}" method="POST"
     input type="text" placeholder="amount" name="booking[amount]"
-    input.button type="submit" value="NEW Reservacion >>"
+    input.button type="submit" value="Compra boletos"
 
-ul.lists
-  - ticket.bookings.each do |booking|
-    == slim :booking, locals: { booking: booking }
+

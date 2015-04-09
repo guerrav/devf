@@ -2,6 +2,7 @@ require 'sinatra'
 require 'slim'
 require 'data_mapper'
 require "sinatra/reloader" if development?
+require 'sinatra/assetpack'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
@@ -12,6 +13,7 @@ class Event
   property :capacity,     Integer
   property :date,         DateTime
   property :place,        String
+  property :city,         String
   property :description,  String
 
   
@@ -44,11 +46,6 @@ class Booking
   has n, :payments
 end
   
-
-
-
-
-
 class Payment
   include DataMapper::Resource
   property :id,           Serial
@@ -82,13 +79,25 @@ get '/event/info/:id' do
   slim :event_info
 end
 
-get '/booking/payment/:id' do
+get '/booking/:id' do
 
-  @ticket = 
+
+  @booking = Booking.get(params[:id])
   slim :payment
 end
 
+get '/booking/payment/:id' do
 
+  @payment = Payment.get(params[:id])
+  slim :confirmation
+end
+
+
+get '/my-events' do
+
+  @events = Event.all(:order => [:name])
+  slim :my_events
+end
 
 
 ######## EVENT
@@ -141,7 +150,8 @@ post '/ticket/:id' do
   booking = ticket.bookings.create! params['booking']
   booking.event_id = ticket[:event_id]
   booking.save
-  redirect '/booking/payment/:id'
+
+  redirect '/booking/' + booking.id.to_s
 end
 
 
@@ -154,7 +164,7 @@ post '/booking/:id' do
   booking = Booking.get(params[:id])
   payment = booking.payments.create! params['payment']
   payment.save
-  redirect back
+  redirect '/booking/payment/' + payment.id.to_s
 end
 
 

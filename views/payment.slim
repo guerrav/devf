@@ -1,1 +1,16 @@
-h1 payment
+-if @booking
+	- event = Event.get(@booking.event_id)
+	- ticket = Ticket.get(@booking.ticket_id)
+	- total = ticket.price * @booking.amount
+
+
+	h1= event.name
+	h3= ticket.nametype
+	h3 #{@booking.amount} boletos
+	h3 Costo total: $ #{total}
+
+
+	h3 Seleccionar forma de pago
+	form.new-list action="/booking/#{@booking.id}" method="POST"
+    	input type="text" placeholder="tipo de pago" name="payment[type]"
+    	input.button type="submit" value="Seleccionar"

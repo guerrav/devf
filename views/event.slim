@@ -1,9 +1,16 @@
-li.event
-  h1
-    a href="event/info/#{event.id}" #{event.name.capitalize}
+li.event id="#{event.id}"
+	figure.picture-holder
+		a href="event/info/#{event.id}"
+	div.event-content
+		span.city #{event.city}
+		h2
+			a href="event/info/#{event.id}" #{event.name.capitalize}
+		ul
+			li
+				span class=["icon", "ss-pika", "ssp-calendar"]
+				span #{event.date}
+			li
+				span class=["icon", "ssp-pika", "ssp-location"]
+				span #{event.place}
 
-  a href="event/new-booking/#{event.id}" Reserva!
-
-  
-
-  
+  	a class=["trk-buy", "event-action"] href="event/new-booking/#{event.id}" Comprar boletos

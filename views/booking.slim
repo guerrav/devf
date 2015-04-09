@@ -3,7 +3,7 @@ li
 
   form.new-list action="/booking/#{booking.id}" method="POST"
     input type="text" placeholder="tipo de pago" name="payment[type]"
-    input.button type="submit" value="NEW Pago >>"
+    input.button type="submit" value="Nuevo Pago>>"
 
 ul.lists
   - booking.payments.each do |payment|

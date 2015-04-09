@@ -1,3 +1,10 @@
-ul.lists
+div.row
+  div class=["large-12", "columns"]
+    img src="https://boletia.com/images/landing/boletia-conference.jpg"
+div.row 
+  h1 class=["large-12", "columns"] Eventos destacados del mes
+
+ul.row
   - @events.each do |event|
-    == slim :event, locals: { event: event }
+  	-if event.tickets.last
+    	== slim :event, locals: { event: event }
