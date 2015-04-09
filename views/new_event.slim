@@ -1,0 +1,17 @@
+
+form.new-list action="/new/event" method="POST"
+
+  h1 Crea tu evento
+  input type="text" placeholder="Nombre" name="event[name]"
+  input type="text" placeholder="Lugar" name="event[place]"
+  input type="text" placeholder="Fecha" name="event[date]"
+  textarea  placeholder="Cuentanos sobre tu evento" name="event[description]"
+  input.button type="submit" value="Crear evento"
+
+- if @events.count > 1
+  h2
+    a href="/my-events" Ve tus eventos
+
+
+
+
