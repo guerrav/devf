@@ -1,0 +1,26 @@
+.fullwidth img {
+    display: block;
+    width: 100%; /* just add width in case you want the image covering full-width */
+    margin: 0 auto;
+}
+
+.body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1,h2,h3,h4,h5,p {
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+.button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.top-bar-section ul li > a.button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.top-bar-section ul li > a {
+   font-family: 'Montserrat', sans-serif;
+}
